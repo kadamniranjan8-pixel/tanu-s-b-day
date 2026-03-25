@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanu Birthday Surprise</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+        background-position: center;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        color: #fff;
+    }
+
+    /* COUNTDOWN PAGE */
+    #countPage {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        backdrop-filter: blur(2px);
+    }
+
+    #timer {
+        font-size: 65px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-shadow: 0px 0px 18px rgba(255, 110, 255, 0.9),
+                     0px 0px 8px rgba(255, 255, 255, 0.8);
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        text-shadow: 0px 0px 10px rgba(255,255,255,0.8);
+    }
+
+    /* WISH PAGE */
+    #wishPage {
+        display: none;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    #wishText {
+        font-family: "Great Vibes", cursive;
+        font-size: 60px;
+        letter-spacing: 2px;
+        color: #fff;
+        text-shadow: 
+            0 0 12px rgba(255, 75, 255, 0.9),
+            0 0 22px rgba(255, 75, 255, 0.8),
+            0 0 40px rgba(255, 75, 255, 1);
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- COUNTDOWN PAGE -->
+<div id="countPage">
+    <h2>Surprise Unlocking In...</h2>
+    <div id="timer">Loading...</div>
+</div>
+
+<!-- WISH PAGE -->
+<div id="wishPage">
+    <h1 id="wishText">Happy Birthday Tanu ❤️</h1>
+</div>
+
+<script>
+    // SET TARGET TIME
+    let targetTime = new Date("2026-03-25T22:42:00");
+
+    function countdown() {
+        let now = new Date().getTime();
+        let diff = targetTime - now;
+
+        if (diff <= 0) {
+            document.getElementById("countPage").style.display = "none";
+            document.body.style.backgroundImage = "url('wish-bg.jpg')";
+            document.getElementById("wishPage").style.display = "flex";
+            return;
+        }
+
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("timer").innerHTML =
+            (minutes < 10 ? "0" : "") + minutes + ":" +
+            (seconds < 10 ? "0" : "") + seconds;
+
+        document.body.style.backgroundImage = "url('count-bg.jpg')";
+    }
+
+    setInterval(countdown, 1000);
+</script>
+
+</body>
+</html>
